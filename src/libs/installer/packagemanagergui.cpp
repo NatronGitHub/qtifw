@@ -1303,10 +1303,11 @@ bool TargetDirectoryPage::validatePage()
 
     if (dir.exists() && dir.isReadable()) {
         // it exists, but is not empty
-        if (dir == QDir::root()) {
+        if (dir == QDir::root() || dir == QDir::homePath() || dir == QDir::tempPath())
+        {
             MessageBoxHandler::critical(MessageBoxHandler::currentBestSuitParent(),
                 QLatin1String("ForbiddenTargetDirectoryMessage"), tr("Error"), tr("As the install directory "
-                "is completely deleted on uninstall, installing in %1 is forbidden.").arg(QDir::rootPath()),
+                "is completely deleted on uninstall, installing in this folder is forbidden."),
                 QMessageBox::Ok);
             return false;
         }

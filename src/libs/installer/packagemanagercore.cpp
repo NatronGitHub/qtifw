@@ -1543,6 +1543,8 @@ QList<QVariant> PackageManagerCore::execute(const QString &program, const QStrin
         adjustedArguments.append(replaceVariables(argument));
     QString adjustedStdIn = replaceVariables(stdIn);
 
+    qDebug() << "Core: execute" << program << arguments << adjustedArguments;
+
     connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), &loop, SLOT(quit()));
     process.start(adjustedProgram, adjustedArguments,
         adjustedStdIn.isNull() ? QIODevice::ReadOnly : QIODevice::ReadWrite);
