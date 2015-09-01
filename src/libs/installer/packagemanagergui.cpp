@@ -1277,7 +1277,7 @@ void TargetDirectoryPage::initializePage()
     QString targetDir = packageManagerCore()->value(scTargetDir);
     if (targetDir.isEmpty()) {
 #ifdef Q_OS_WIN
-        targetDir = packageManagerCore()->value("ApplicationsDir");
+        targetDir = packageManagerCore()->value(QLatin1String("ApplicationsDir"));
         Q_ASSERT(!targetDir.isEmpty());
         targetDir += QDir::separator();
         targetDir += packageManagerCore()->value(scPublisher);
