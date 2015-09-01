@@ -1276,11 +1276,20 @@ void TargetDirectoryPage::initializePage()
 {
     QString targetDir = packageManagerCore()->value(scTargetDir);
     if (targetDir.isEmpty()) {
+#ifdef Q_OS_WIN
+        targetDir = packageManagerCore()->value("ApplicationsDir");
+        Q_ASSERT(!targetDir.isEmpty());
+        targetDir += QDir::separator();
+        targetDir += packageManagerCore()->value(scPublisher);
+        targetDir += QDir::separator();
+        targetDir += productName();
+#else
         targetDir = QDir::homePath() + QDir::separator();
         // prevent spaces in the default target directory
         if (targetDir.contains(QLatin1Char(' ')))
             targetDir = QDir::rootPath();
         targetDir += productName().remove(QLatin1Char(' '));
+ #endif
     }
     m_lineEdit->setText(QDir::toNativeSeparators(QDir(targetDir).absolutePath()));
 
