@@ -40,6 +40,7 @@
 ****************************************************************************/
 #include "packagemanagercoredata.h"
 
+#include <iostream>
 #include "errors.h"
 #include "fileutils.h"
 #include "qsettingswrapper.h"
@@ -79,6 +80,7 @@ PackageManagerCoreData::PackageManagerCoreData(const QHash<QString, QString> &va
     dir = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation).value(0);
 # endif
 #endif
+    std::cout << "ApplicationsDir = " << dir.toStdString() << std::endl;
     m_variables.insert(QLatin1String("ApplicationsDir"), dir);
 
 #ifdef Q_OS_WIN
